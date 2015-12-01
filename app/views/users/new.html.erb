@@ -1,0 +1,14 @@
+
+
+<h2>Sign Up</h2>
+
+<%= form_tag "/new-user" do %>
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+<div>
+  <%= label_tag :email %>
+  <%= email_field_tag "user[email]", nil, placeholder: "email", class: "email" %>
+</div>
+
+<%= submit_tag "Sign Up" %>
+
+<%end%>

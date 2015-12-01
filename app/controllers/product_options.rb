@@ -1,0 +1,3 @@
+class ProductOptionsController < ApplicationController
+
+end

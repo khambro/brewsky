@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+
+
+  get "/", to: "products#index"
+
+
+  get "/users", to: "users#new", as: :new_user
+  post "/new-user", to: "users#create"
+  post "/users/new/:id", to: "users#create"
+
+  get "/new-products", to: "products#new"
+  post "/new-products", to: "products#create"
+
+  get "/orders", to: "orders#show"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

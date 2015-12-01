@@ -1,0 +1,22 @@
+
+<h2>New Product</h2>
+
+<%= form_tag "/new-products" do %>
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+<div>
+  <%= label_tag :name %>
+  <%= text_area_tag "product[name]", nil, placeholder: "name", class: "text-field" %>
+</div>
+<div>
+  <%= label_tag :description %>
+  <%= text_area_tag "product[description]", nil, placeholder: "description", class: "text-field" %>
+</div>
+<div>
+  <%= label_tag :image %>
+  <%= url_field_tag "product[image_url]", nil, placeholder: "image url", class: "image-field" %>
+</div>
+
+
+<%= submit_tag "List Product" %>
+
+<%end%>

@@ -1,0 +1,32 @@
+<table class="table six columns">
+<tr><td colspan="7" class="title"><h3>Brewskies!</h3></td></tr>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Image</th>
+  </tr>
+    <% @products.each do |n| %>
+      <tr>
+        <td> <%= n.name %> </td>
+        <td> <%= n.description %>
+        <td> <%= n.image_url %> </td>
+          <div class="buttons">
+            <td>
+            <li>
+              <form action="/index/edit/<%= n.id %>" method="POST">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                <input type="hidden" name="_method" value="GET" />
+                <input class="button" type="submit" value="Edit" />
+              </form>
+            </li></td>
+            <td><li>
+              <form action="/index/<%= n.id %>" method="POST">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                <input type="hidden" name="_method" value="DELETE" />
+                <input class="button" type="submit" value="Delete" data-confirm="Delete the data?"/>
+              </form>
+            </li></td>
+          </div>
+      </tr>
+    <% end %>
+</table>
