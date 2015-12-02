@@ -2,24 +2,36 @@
 <html>
 <head>
   <title>Brewsky</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
   <div class="header">
-    <h3><%= link_to (image_tag 'http://3.bp.blogspot.com/-7uyuT-gKi-U/UR-x7PVXyiI/AAAAAAAAALs/U40cchXmbx0/s320/ladybeer.jpg'), "/" %></h3>
-    <h3>Cart</h3>
-    <% if @current_user %>
-      <h3>View Account</h3>
-      <h3 class="out">Sign Out</h3> 
-    <% else %>
-      <h3> <%= link_to "Sign Up", :new_user %></h3>
-      <h3>Sign In</h3>
-    <% end %>
-    <h3>Admin Products</h3>
-    <h3>Admin Order</h3>
+    <%= link_to (image_tag "ladybeer.jpg"), "/", class:"logo" %></h3>
+    <h1>Brewskies!</h1>
+    <div class="links">
+      <% if @current_user %>
+        <%= link_to "View Account", "/view-account", class:"account" %>
+        <%= link_to "Sign Out", sign_out_path, class:"sign_out"  %>
+        <h3>Cart</h3>
+      <% else %>
+        <h3 class="appear">Sign In</h3><%= form_tag "/sign-in", class:"disappear", style:"display:none" do %>
+        Email Address
+        <%= text_field_tag :email %>
+        Password
+        <%= password_field_tag :password%>
+        <%= submit_tag "Sign In" %>
+        <% end %>
+        <h3> <%= link_to "Sign Up", :new_user %></h3>
+      <% end %>
+      <% if @current_user && @current_user.admin? == true %>
+        <%= link_to "Admin Products", :new_product, class:"admin" %>
+        <%= link_to "Admin Order", "/admin-order", class:"admin-order" %>
+      <% end %>
+
+    </div>
   </div>
 
 <%= yield %>

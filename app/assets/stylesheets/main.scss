@@ -1,8 +1,26 @@
 .header {
   display: inline-block;
-  height: 80px;
+  height: 150px;
+  width: 100%;
+}
+.header h1 {
+  display: inline-block;
 }
 
 .header h3 {
   display: inline-block;
+  text-decoration: none;
+}
+
+.header a {
+  text-decoration: none;
+}
+
+.header .links {
+  display: inline-block;
+  float: right;
+}
+
+li {
+  list-style: none;
 }

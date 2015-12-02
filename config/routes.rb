@@ -6,10 +6,14 @@ Rails.application.routes.draw do
 
   get "/users", to: "users#new", as: :new_user
   post "/new-user", to: "users#create"
-  post "/users/new/:id", to: "users#create"
+  get "/sign-out", to: "sessions#sign_out", as: :sign_out
+  post "/sign-in", to: "sessions#sign_in", as: :sign_in
 
-  get "/new-products", to: "products#new"
-  post "/new-products", to: "products#create"
+  get "/admin/new-products", to: "products#new", as: :new_product
+  post "/admin/new-products", to: "products#create"
+  delete "/admin/new-products/:id", to: "products#delete"
+  get "/admin/new-products/edit/:id", to: "products#edit", as: :edit
+  post "/admin/new-products/edit/:id", to: "products#update"
 
   get "/orders", to: "orders#show"
 

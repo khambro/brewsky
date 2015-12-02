@@ -7,16 +7,38 @@ class ProductsController < ApplicationController
     end
   end
 
-
   def create
-    @product = Product.new(product_params)
-    @product.save
-    redirect_to "/"
+      @product = Product.new(product_params)
+      @product.save
+      redirect_to "/"
   end
 
   def new
     @products = Product.all
   end
+
+
+  def edit
+    @product = Product.find(params[:id])
+  end
+
+  def update
+    @ph = Ph.find(params[:id])
+    @ph.reading = params[:reading]
+    @ph.mood = params[:mood]
+    if @ph.save
+      redirect_to "/"
+    else
+      render "/stats/edit"
+    end
+  end
+
+  def delete
+    @product = Product.find(params[:id])
+    @product.destroy
+    redirect_to "/new-products"
+  end
+
 
 
   private

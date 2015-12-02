@@ -1,11 +1,7 @@
 class UsersController < ApplicationController
 
 
-
-
-
   def create
-
     @user = User.new(user_params)
     @user.save
     session[:id] = @user.id
@@ -18,10 +14,11 @@ class UsersController < ApplicationController
 
 
 
+
   private
 
   def user_params
-    params.require(:user).permit(:email)
+    params.require(:user).permit(:email, :password)
   end
 
 
