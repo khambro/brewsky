@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
   def create
       @product = Product.new(product_params)
       @product.save
-      redirect_to "/"
+      redirect_to "/admin/products"
   end
 
   def new
@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
     @ph.reading = params[:reading]
     @ph.mood = params[:mood]
     if @ph.save
-      redirect_to "/"
+      redirect_to "/admin/products"
     else
       render "/stats/edit"
     end
@@ -36,7 +36,7 @@ class ProductsController < ApplicationController
   def delete
     @product = Product.find(params[:id])
     @product.destroy
-    redirect_to "/new-products"
+    redirect_to "/admin/products"
   end
 
 

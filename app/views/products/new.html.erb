@@ -1,7 +1,7 @@
 
 <h2>Add New Products</h2>
 
-<%= form_tag "/admin/new-products" do %>
+<%= form_tag "/admin/products" do %>
 <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
 <div>
   <%= label_tag :name %>
@@ -36,14 +36,14 @@
           <div class="buttons">
             <td>
             <li>
-              <form action="/admin/new-products/edit/<%= n.id %>" method="POST">
+              <form action="/admin/products/edit/<%= n.id %>" method="POST">
                 <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
                 <input type="hidden" name="_method" value="GET" />
                 <input class="button" type="submit" value="Edit" />
               </form>
             </li></td>
             <td><li>
-              <form action="/admin/new-products/<%= n.id %>" method="POST">
+              <form action="/admin/products/<%= n.id %>" method="POST">
                 <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
                 <input type="hidden" name="_method" value="DELETE" />
                 <input class="button" type="submit" value="Delete" data-confirm="Delete the data?"/>

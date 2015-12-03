@@ -27,7 +27,7 @@
         <h3> <%= link_to "Sign Up", :new_user %></h3>
       <% end %>
       <% if @current_user && @current_user.admin? == true %>
-        <%= link_to "Admin Products", :new_product, class:"admin" %>
+        <%= link_to "Admin Products", :products, class:"admin" %>
         <%= link_to "Admin Order", "/admin-order", class:"admin-order" %>
       <% end %>
 

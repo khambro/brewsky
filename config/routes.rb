@@ -9,11 +9,11 @@ Rails.application.routes.draw do
   get "/sign-out", to: "sessions#sign_out", as: :sign_out
   post "/sign-in", to: "sessions#sign_in", as: :sign_in
 
-  get "/admin/new-products", to: "products#new", as: :new_product
-  post "/admin/new-products", to: "products#create"
-  delete "/admin/new-products/:id", to: "products#delete"
-  get "/admin/new-products/edit/:id", to: "products#edit", as: :edit
-  post "/admin/new-products/edit/:id", to: "products#update"
+  get "/admin/products", to: "products#new", as: :products
+  post "/admin/products", to: "products#create"
+  delete "/admin/products/:id", to: "products#delete"
+  get "/admin/products/edit/:id", to: "products#edit", as: :edit
+  post "/admin/products/edit/:id", to: "products#update"
 
   get "/view-account/:id", to: "users#show"
   post "/view-account/edit/:id", to: "users#edit"
