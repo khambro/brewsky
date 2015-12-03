@@ -12,6 +12,14 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def show
+    @current_user = User.find(session[:id])
+
+    # @orders = Order.where(user_id: params[:id])
+
+  end
+
+
 
 
 

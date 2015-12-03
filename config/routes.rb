@@ -15,6 +15,13 @@ Rails.application.routes.draw do
   get "/admin/new-products/edit/:id", to: "products#edit", as: :edit
   post "/admin/new-products/edit/:id", to: "products#update"
 
+  get "/view-account/:id", to: "users#show"
+  post "/view-account/edit/:id", to: "users#edit"
+
+  get "/product/options/:id", to: "product_options#index"
+
+
+
   get "/orders", to: "orders#show"
 
   # The priority is based upon order of creation: first created -> highest priority.

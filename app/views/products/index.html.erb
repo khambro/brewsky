@@ -30,6 +30,10 @@ As an admin I can see a "Order" link which takes me to the admin order managemen
         <td> <%= n.name %> </td>
         <td> <%= n.description %>
         <td> <%= image_tag n.image_url %> </td>
+        <div class="buttons">
+          <td>
+          <li>
+            <%= link_to "Product Options", "/product/options/#{n.id}" %>
       </tr>
     <% end %>
 </table>
