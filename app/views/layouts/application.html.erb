@@ -13,9 +13,10 @@
     <h1>Brewskies!</h1>
     <div class="links">
       <% if @current_user %>
+        <h4>Logged in as: <%= @current_user[:email] %></h4>
         <h3><%= link_to "View Account", "/view-account/#{@current_user.id}", class:"account" %></h3>
-        <h3><%= link_to "Sign Out", sign_out_path, class:"sign_out"  %></h3>
-        <h3> <%= link_to "Cart", :orders %></h3>
+        <h3><%= link_to "Sign Out", :sign_out, class:"sign_out"  %></h3>
+        <h3> <%= link_to "Cart", "/cart/#{@current_user.id}", class:"cart" %></h3>
       <% else %>
         <h3 class="appear">Sign In</h3><%= form_tag "/sign-in", class:"disappear", style:"display:none" do %>
         Email Address

@@ -13,25 +13,6 @@ class ProductsController < ApplicationController
       redirect_to "/admin/products"
   end
 
-  def new
-    @products = Product.all
-  end
-
-
-  def edit
-    @product = Product.find(params[:id])
-  end
-
-  def update
-    @ph = Ph.find(params[:id])
-    @ph.reading = params[:reading]
-    @ph.mood = params[:mood]
-    if @ph.save
-      redirect_to "/admin/products"
-    else
-      render "/stats/edit"
-    end
-  end
 
   def delete
     @product = Product.find(params[:id])

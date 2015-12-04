@@ -9,16 +9,24 @@ Rails.application.routes.draw do
   get "/sign-out", to: "sessions#sign_out", as: :sign_out
   post "/sign-in", to: "sessions#sign_in", as: :sign_in
 
-  get "/admin/products", to: "products#new", as: :products
+  get "/admin/products", to: "admin#new", as: :products
   post "/admin/products", to: "products#create"
   delete "/admin/products/:id", to: "products#delete"
-  get "/admin/products/edit/:id", to: "products#edit", as: :edit
-  post "/admin/products/edit/:id", to: "products#update"
+  get "/admin/products/edit/:id", to: "admin#edit", as: :edit
+  post "/admin/products/edit/:id", to: "admin#update"
+
+  get "admin/product-options/edit/:id", to: "product_options#index", as: :options
+  post "admin/product-options/edit/:id", to: "product_options#create", as: :edit_options
+  delete "admin/product-options/edit/:id", to: "product_options#delete"
+  get "admin/product-options/edit/:id", to: "product_options#edit"
+  post "admin/product-options/edit/:id", to: "product_options#update"
+
 
   get "/view-account/:id", to: "users#show"
   post "/view-account/edit/:id", to: "users#edit"
 
-  get "/product/options/:id", to: "product_options#index"
+  get "/cart/:id", to: "orders#show", as: :cart
+
 
 
 

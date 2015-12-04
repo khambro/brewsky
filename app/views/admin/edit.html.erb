@@ -1,0 +1,28 @@
+<h1>Edit <%= @product.name %></h1>
+
+  <% if @product%>
+    <ul>
+      <% @product.errors.each do |column, error| %>
+        <li><%= column %> <%= error %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+
+  <%= form_tag "/admin/products/edit/#{@product.id}" do %>
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+  <div>
+    <%= label_tag :name %>
+    <%= text_field_tag "product[name]", nil, placeholder: "name", class: "name" %>
+  </div>
+  <div>
+    <%= label_tag :description %>
+    <%= text_area_tag "product[description]", nil, placeholder: "description", class: "description" %>
+  </div>
+
+  <%= submit_tag "Update" %>
+
+  <%end%>
+
+
+  
