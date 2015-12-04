@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   get "admin/product-options/edit/:id", to: "product_options#edit"
   post "admin/product-options/edit/:id", to: "product_options#update"
 
-
+  get "/product/options/:id", to: "products#show" 
   get "/view-account/:id", to: "users#show"
   post "/view-account/edit/:id", to: "users#edit"
 

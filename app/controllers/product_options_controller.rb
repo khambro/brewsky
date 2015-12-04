@@ -19,6 +19,11 @@ class ProductOptionsController < ApplicationController
       redirect_to "/admin/product-options/edit/#{@product.id}"
   end
 
+
+  def formatted_price
+    "$#{@product_options.price_in.cents.to_f/100}"
+  end
+
   def new
 
   end

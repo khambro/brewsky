@@ -20,6 +20,11 @@ class ProductsController < ApplicationController
     redirect_to "/admin/products"
   end
 
+  def show
+    @product = Product.find(params[:id])
+    @product_options = ProductOption.all
+  end
+
 
 
   private

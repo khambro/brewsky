@@ -33,7 +33,7 @@
         <% if n.product_id == @product.id %>
       <tr>
         <td> <%= n.name %> </td>
-        <td> <%= n.price_in_cents %>
+        <td> $<%= n.price_in_cents.to_f/100 %>
           <div class="buttons">
             <td>
             <li>
@@ -52,7 +52,7 @@
             </li></td>
           </div>
       </tr>
-  
+
       <% end %>
     <% end %>
 </table>

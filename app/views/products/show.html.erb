@@ -1,0 +1,27 @@
+
+
+<table class="table">
+<tr><td colspan="7" class="title"><h3><%= @product.name %></h3></td></tr>
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+  </tr>
+      <% @product_options.each do |n| %>
+        <% if n.product_id == @product.id %>
+      <tr>
+        <td> <%= n.name %> </td>
+        <td> $<%= n.price_in_cents.to_f/100 %>
+        <td>
+        <li>
+          <%= form_tag "/product-options/#{n.id}" do %>
+            <input type="hidden" name="product_options[id]" value="<%= n.id %>" />
+            <%= submit_tag "Add to Cart" %>
+          <% end %>
+        </li></td>
+      </tr>
+      <% end %>
+    <% end %>
+</table>
+
+
+#add something to cart, creates order and adds that item to it. New instance of order- saves order id into session. If same session, adds to same cart.
