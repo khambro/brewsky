@@ -5,16 +5,12 @@ class OrdersController < ApplicationController
 
     @order = Order.new(order_params)
     @order.save
-    # if session[:id]
-    #   @current_user = User.find(session[:id])
-    # end
-    # session[:id] = @order.id
-    redirect_to "/cart/#{session.id}"
+
+    redirect_to "/cart/checkout/:id"
   end
 
 
-  def update
-  end
+
 
   def show
     #show cart
@@ -27,18 +23,17 @@ class OrdersController < ApplicationController
     # session[:id] = @order.id
     # redirect_to "/cart/#{session.id}"
     # @order = Order.find(params[:session][:id])
-
-
   end
 
-  def checkout
+  def update
   end
-  
+
+
 
   private
 
   def order_params
-    params.require(:order).permit(:user_id, :name, :shipping_address, :status, :total, :items)
+    params.require(:order).permit(:user_id, :name, :shipping_address, :status, :total)
   end
 
 

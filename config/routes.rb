@@ -27,6 +27,10 @@ Rails.application.routes.draw do
 
   get "/cart/:id", to: "items#show", as: :cart
   post "/cart/:id", to: "items#create"
+  post "/cart/checkout/:id", to: "orders#create"
+  get "/cart/checkout/:id", to: "orders#show"
+  post "/cart/checkout/:id", to: "orders#update"
+
 
 
 

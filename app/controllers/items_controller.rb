@@ -1,9 +1,10 @@
 class ItemsController < ApplicationController
 
   def create
-    # @product_option = ProductOption.find(params[:item][:product_option_id])
+
     @item = Item.new(item_params)
     if session[:id]
+
       @current_order = Order.find(session[:id])
     else
       @current_order = Order.create

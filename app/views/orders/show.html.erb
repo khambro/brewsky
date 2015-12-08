@@ -1,43 +1,55 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <p>Please review your order</p>
+<div class = "user_info">
 
-<!-- CART! -->
 
-
-<% @items.each do |n| %>
-  <%= n.price %>
-  <%= n.product_option_id %>
-<% end %>
-
-<%= form_tag "/cart/:id", class:"form-control" do %>
+<%= form_tag "/cart/checkout/:id" do %>
 <div>
   <%= label_tag :name %>
-  <%= text_field_tag "order[name]", nil, placeholder: "name", class: "name" %>
+  <%= text_field_tag "order[name]", nil, placeholder: "First Name, Last Name", class: "name" %>
 </div>
 <div>
   <%= label_tag :address %>
-  <%= text_area_tag "order[address]", nil, placeholder: "address", class: "address" %>
+  <%= text_area_tag "order[address]", nil, placeholder: "Street\nApt#\nState,Zip", class: "address" %>
 </div>
 
 
 <%= submit_tag "Submit Order" %>
 
 <%end%>
+</div>
+
+<div class = "summary">
+
+
+<% @items.each do |n| %>
+  <div class = "col-lg-10">
+    <div>
+      <h4>Item:</h4>
+      <h4 class="item" ><%= n.product_option.name %></h4>
+      <h4>Quantity:</h4>
+      <h4><%= n.quantity %></h4>
+      <h4>Price Each:</h4>
+      <h4><%= number_to_currency n.product_option.price_in_cents.to_f/100 %></h4>
+      <h4>Item Total:</h4>
+      <h4><%= number_to_currency  n.product_option.price_in_cents * n.quantity.to_f  %></h4>
+    </div>
+  </div>
+<% end %>
+<h3>Items in cart = <%= @items.count %></h3>
+
+<h3>Order total=
+  <% sum = 0  %>
+  <% @items.each do |n| %>
+  <% p = n.product_option.price_in_cents %>
+  <% sum += p  %>
+  <% sum.to_f/100  %>
+  <% end %>
+  <%= number_to_currency sum.to_f/100 %>
+</h3>
+
+</div>
+
+
 
 <!-- On the checkout page /checkout
 I see a brief summary of my order (total price)
