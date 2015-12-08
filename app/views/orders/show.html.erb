@@ -1,2 +1,46 @@
 
-<h3>Buy me,<%= @current_user.email %></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>Please review your order</p>
+
+<!-- CART! -->
+
+
+<% @items.each do |n| %>
+  <%= n.price %>
+  <%= n.product_option_id %>
+<% end %>
+
+<%= form_tag "/cart/:id", class:"form-control" do %>
+<div>
+  <%= label_tag :name %>
+  <%= text_field_tag "order[name]", nil, placeholder: "name", class: "name" %>
+</div>
+<div>
+  <%= label_tag :address %>
+  <%= text_area_tag "order[address]", nil, placeholder: "address", class: "address" %>
+</div>
+
+
+<%= submit_tag "Submit Order" %>
+
+<%end%>
+
+<!-- On the checkout page /checkout
+I see a brief summary of my order (total price)
+I must put in my name and address.
+I can click a "Submit order" button
+If the order is valid I am taken to an order confirmation page -->

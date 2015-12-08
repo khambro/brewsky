@@ -21,11 +21,15 @@ Rails.application.routes.draw do
   get "admin/product-options/edit/:id", to: "product_options#edit"
   post "admin/product-options/edit/:id", to: "product_options#update"
 
-  get "/product/options/:id", to: "products#show" 
+  get "/product/options/:id", to: "products#show"
   get "/view-account/:id", to: "users#show"
   post "/view-account/edit/:id", to: "users#edit"
 
-  get "/cart/:id", to: "orders#show", as: :cart
+  get "/cart/:id", to: "items#show", as: :cart
+  post "/cart/:id", to: "items#create"
+
+
+
 
 
 

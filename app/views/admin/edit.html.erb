@@ -9,7 +9,7 @@
   <% end %>
 
 
-  <%= form_tag "/admin/products/edit/#{@product.id}" do %>
+  <%= form_tag "/admin/products/edit/#{@product.id}" class:"form-control" do %>
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
   <div>
     <%= label_tag :name %>
@@ -23,6 +23,3 @@
   <%= submit_tag "Update" %>
 
   <%end%>
-
-
-  

@@ -20,36 +20,36 @@
 
 <%end%>
 
-<table class="table">
-<tr><td colspan="7" class="title"><h3>Brewskies!</h3></td></tr>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Image</th>
-  </tr>
+
+
+<div class="row text-center">
     <% @products.each do |n| %>
-      <tr>
-        <td> <%= n.name %> </td>
-        <td> <%= n.description %>
-        <td> <%= image_tag n.image_url %> </td>
-        <td> <%= link_to "Add Product Options", "/admin/product-options/edit/#{n.id}" %></td>
-          <div class="buttons">
-            <td>
-            <li>
-              <form action="/admin/products/edit/<%= n.id %>" method="POST">
-                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-                <input type="hidden" name="_method" value="GET" />
-                <input class="button" type="submit" value="Edit" />
-              </form>
-            </li></td>
-            <td><li>
-              <form action="/admin/products/<%= n.id %>" method="POST">
-                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-                <input type="hidden" name="_method" value="DELETE" />
-                <input class="button" type="submit" value="Delete" data-confirm="Delete the data?"/>
-              </form>
-            </li></td>
-          </div>
-      </tr>
+      <div class="col-md-3 col-sm-6 hero-feature">
+        <div class="thumbnail">
+            <%= image_tag n.image_url, class:"product_image" %>
+            <div class="caption">
+                <h3><%= n.name %></h3>
+                <p><%= n.description %></p>
+                <p><form action="/admin/products/edit/<%= n.id %>" method="POST">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                    <input type="hidden" name="_method" value="GET" />
+                    <input class="btn" type="submit" value="Edit" />
+                   </form>
+                   <form action="/admin/products/<%= n.id %>" method="POST">
+                     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                     <input type="hidden" name="_method" value="DELETE" />
+                     <input class="btn" type="submit" value="Delete" data-confirm="Delete the data?"/>
+                   </form>
+                   <%= link_to "Add Product Options", "/admin/product-options/edit/#{n.id}"%>
+                 </p>
+
+            </div>
+        </div>
+    </div>
     <% end %>
-</table>
+  </div>
+
+
+
+
+<

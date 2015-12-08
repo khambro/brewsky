@@ -1,7 +1,8 @@
 .header {
   display: inline-block;
-  height: 150px;
+  height: 100px;
   width: 100%;
+  background-color: rgba(114, 127, 171, 0.6)
 }
 .header h1 {
   display: inline-block;
@@ -28,4 +29,9 @@
 
 li {
   list-style: none;
+}
+
+.product_image {
+  height: 150px;
+  width: 100 px;
 }

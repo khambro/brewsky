@@ -1,39 +1,50 @@
 
 
-<% if @current_user %>
-  <h3>Hello, <%= @current_user[:email] %></h3>
-<% end %>
+
+<header class="jumbotron hero-spacer">
+  <% if @current_user %>
+    <h1>Welcome, <%= @current_user[:email] %></h1>
+    <% else %>
+    <h1>Welcome!</h1>
+  <% end %>
+    <p>Brewskies is the place to be for all of your craft beer needs. Looking for an Imperial IPA? We've got that! A dark smokey stout? Just search below. We're happy you're here. Cheers! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p><a class="btn btn-primary btn-large">Sign Up</a></p>
+</header>
 
 
-<!--
-In the header on all pages
-I can click the logo/title to return to the homepage
-I can click a link to my cart which contains the number of items in my cart, which takes me to a cart page
-As a guest I can click a link to view a sign up page
-As a guest I can click a link to view a sign in page
-As a logged in user I cannot see a link to view a sign up or sign in page
-As a logged in user I can click a link to view my account page
-As a guest I cannot see a link to view my account page
-As an admin I can see a "Products" link which takes me to the admin product management page
-As an admin I can see a "Order" link which takes me to the admin order management page -->
+<hr>
+
+<div class="row">
+  <div class="col-lg-12">
+    <h3>Featured Brews</h3>
+  </div>
+</div>
+
+<div class="row text-center">
+  <% @products.each do |n| %>
+  <div class="col-md-3 col-sm-6 hero-feature">
+    <div class="thumbnail">
+      <%= image_tag n.image_url, class:"product_image" %>
+        <div class="caption">
+          <h3><%= n.name %></h3>
+          <p><%= n.description %></p>
+          <p>
+            <form action="/cart/:id" method="POST" class="btn btn-primary">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+              <input class="button" type="submit" value="Buy Now" />
+            </form>
 
 
-<table class="table six columns">
-<tr><td colspan="7" class="title"><h3>Check out the tasty selection:</h3></td></tr>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Image</th>
-  </tr>
-    <% @products.each do |n| %>
-      <tr>
-        <td> <%= n.name %> </td>
-        <td> <%= n.description %>
-        <td> <%= image_tag n.image_url %> </td>
-        <div class="buttons">
-          <td>
-          <li>
-            <%= link_to "Product Options", "/product/options/#{n.id}" %>
-      </tr>
-    <% end %>
-</table>
+
+
+
+          <%= link_to "More Info", "/product/options/#{n.id}" %></p>
+        </div>
+
+    </div>
+  </div>
+  <% end %>
+</div>
