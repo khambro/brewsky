@@ -12,7 +12,7 @@
         <td> <%= number_to_currency n.price_in_cents.to_f/100 %>
         <td>
         <li>
-          <%= form_tag "/cart/#{n.product_id}" do %>
+          <%= form_tag "/cart" do %>
             <input type="hidden" name="item[product_option_id]" value="<%= n.id %>" />
             <%= select_tag "item[quantity]", options_for_select([1,2,3,4,5])  %>
             <input type="hidden" name="item[price]" value="<%= n.price_in_cents %>" />

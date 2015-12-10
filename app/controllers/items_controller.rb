@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
 
   def create
-
     @item = Item.new(item_params)
     if session[:id]
       @current_order = Order.find(session[:id])
@@ -16,8 +15,10 @@ class ItemsController < ApplicationController
   end
 
   def show
+
       @current_order = Order.find(session[:id])
       @items = Item.where(order_id: @current_order.id)
+
   end
 
 

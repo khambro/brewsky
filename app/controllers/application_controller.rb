@@ -11,8 +11,14 @@ class ApplicationController < ActionController::Base
   end
 
   def cart
-      @current_order = Order.find(session[:id]) if session[:id]
+    if session[:id]
+      @current_order = Order.find(session[:id])
+    else
+      @current_order = Order.create
+      session[:id] = @current_order.id
+    end
       @items = Item.where(order_id: @current_order.id) if @current_order
+    
   end
 
 

@@ -6,15 +6,17 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.save
 
-    redirect_to "/cart/checkout/:id"
+    redirect_to "/cart/checkout/#{@current_order.id}"
   end
 
 
 
   def show
-
     @current_order = Order.find(session[:id])
-    @items = Item.all
+    @items = Item.where(order_id: @current_order)
+
+
+
     # if session[:id]
     #   @current_user = User.find(session[:id])
     # end
@@ -24,14 +26,14 @@ class OrdersController < ApplicationController
   end
 
   def update
+
     @current_order = Order.find(session[:id])
     @current_order.name = params[:name]
     @current_order.shipping_address = params[:address]
     @current_order.status = "paid"
     if @current_order.save
-
-
-      redirect_to "/cart/checkout/:id/confirmation"
+    session.delete(:id)
+      redirect_to "/cart/checkout/#{@current_order.id}/confirmation"
 
     else
         raise

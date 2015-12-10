@@ -1,50 +1,59 @@
-<h2>Add New Products</h2>
+<div class="container">
 
-<%= form_tag "/admin/products" do %>
-<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-<div>
-  <%= label_tag :name %>
-  <%= text_area_tag "product[name]", nil, placeholder: "name", class: "text-field" %>
+  <h2>Add New Products</h2>
+
+  <%= form_tag "/admin/products" do %>
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+  <div>
+    <%= label_tag :name %>
+    <%= text_area_tag "product[name]", nil, placeholder: "name", class: "text-field" %>
+  </div>
+  <div>
+    <%= label_tag :description %>
+    <%= text_area_tag "product[description]", nil, placeholder: "description", class: "text-field" %>
+  </div>
+  <div>
+    <%= label_tag :image %>
+    <%= url_field_tag "product[image_url]", nil, placeholder: "image url", class: "image-field" %>
+  </div>
+
+
+  <%= submit_tag "List Product" %>
+
+  <%end%>
+
 </div>
-<div>
-  <%= label_tag :description %>
-  <%= text_area_tag "product[description]", nil, placeholder: "description", class: "text-field" %>
-</div>
-<div>
-  <%= label_tag :image %>
-  <%= url_field_tag "product[image_url]", nil, placeholder: "image url", class: "image-field" %>
-</div>
 
 
-<%= submit_tag "List Product" %>
-
-<%end%>
-
-
-
-<div class="row text-center">
-    <% @products.each do |n| %>
-      <div class="col-md-3 col-sm-6 hero-feature">
-        <div class="thumbnail">
-            <%= image_tag n.image_url, class:"product_image" %>
-            <div class="caption">
-                <h3><%= n.name %></h3>
-                <p><%= n.description %></p>
-                <p><form action="/admin/products/edit/<%= n.id %>" method="POST">
-                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-                    <input type="hidden" name="_method" value="GET" />
-                    <input class="btn" type="submit" value="Edit" />
-                   </form>
-                   <form action="/admin/products/<%= n.id %>" method="POST">
-                     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-                     <input type="hidden" name="_method" value="DELETE" />
-                     <input class="btn" type="submit" value="Delete" data-confirm="Delete the data?"/>
-                   </form>
-                   <%= link_to "Add Product Options", "/admin/product-options/#{n.id}" %>
-                 </p>
-
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <% @products.in_groups_of(4, false).each do |group| %>
+          <div class="row">
+            <% group.each do |product| %>
+            <div class="product col-md-3 thumbnail">
+              <%= link_to (image_tag product.image_url), "/product/options/#{product.id}"  %>
+              <h2><%= product.name %></h2>
+              <p><%= product.description %></p>
+              <p><form action="/admin/products/edit/<%= product.id %>" method="POST">
+                  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                  <input type="hidden" name="_method" value="GET" />
+                  <input class="btn" type="submit" value="Edit" />
+                 </form>
+                 <form action="/admin/products/<%= product.id %>" method="POST">
+                   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                   <input type="hidden" name="_method" value="DELETE" />
+                   <input class="btn" type="submit" value="Delete" data-confirm="Delete the data?"/>
+                 </form>
+                 <%= link_to "Add Product Options", "/admin/product-options/#{product.id}" %>
+               </p>
             </div>
-        </div>
+            <% end%>
+          </div>
+        <% end%>
+
+      </div>
+
     </div>
-    <% end %>
+
   </div>

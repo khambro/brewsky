@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   post "/cart/checkout/:id", to: "orders#create"
   get "/cart/checkout/:id", to: "orders#show"
   get "/cart", to: "items#show", as: :cart
-  post "/cart/:id", to: "items#create"
+  post "/cart", to: "items#create"
 
   post "/cart/checkout/:id/confirmation", to: "orders#confirmation"
   get "/cart/checkout/:id/confirmation", to: "orders#confirmation"

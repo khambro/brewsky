@@ -28,12 +28,15 @@
 
           <ul class="nav navbar-nav">
             <li><a href="/cart">Cart <% if @current_order %>
-                                <% total_items = 0 %>
-                                <% @items.each do |n| %>
-                                <% total_items += n.quantity  %>
-                                <% end %>
-                                <% end %>
-                                <%= total_items %></li></a>
+                                        <% total_items = 0 %>
+                                        <% @items.each do |n| %>
+                                        <% total_items += n.quantity  %>
+                                        <% end %>
+                                        <%= total_items %>
+                                      <% else %>
+                                        <%= 0 %>
+                                      <% end %></li></a>
+
             <li><%= link_to "Contact Us", "#" %></li>
             <% if @current_user %>
             <!-- <li><%= @current_user.email %></li> -->
