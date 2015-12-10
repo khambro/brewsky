@@ -2,9 +2,6 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
-    if session[:id]
-      @current_user = User.find(session[:id])
-    end
   end
 
   def create

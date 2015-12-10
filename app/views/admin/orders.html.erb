@@ -1,0 +1,27 @@
+<table style="width:100%">
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Order Total</th>
+    <th>Total Items</th>
+    <th>Item Details</th>
+    <th>Order Status</th>
+  </tr>
+  <% @orders.each do |order|%>
+    <tr>
+      <td><%= order.name %></td>
+      <td><%= order.shipping_address %></td>
+      <td><%= number_to_currency order.total.to_f/100 %></td>
+      <td><%= order.items.count %></td>
+      <td><% order.items.each do |item| %>
+          <div>
+            <%= item.product_option.name %>
+            <%= number_to_currency item.price.to_f/100 %>
+          </div>
+            <% end %>
+      </td>
+      <td><%= order.status %></td>
+    </tr>
+    <% end %>
+
+</table>

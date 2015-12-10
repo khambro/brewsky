@@ -31,7 +31,16 @@ li {
   list-style: none;
 }
 
-.product_image {
-  height: 150px;
-  width: 100 px;
+.thumbnail h2{
+  text-align: center;
+}
+
+
+
+.product img {
+  width: 100%;
+}
+
+.product {
+  margin: 0 0 20px 0;
 }

@@ -1,10 +1,9 @@
-
 <%= @product.name %>
 <%= @product.description %>
 
 <h2>Add Product Options</h2>
 
-<%= form_tag "/admin/product-options/edit/#{@product.id}" do %>
+<%= form_tag "/admin/product-options/new" do %>
 
 <div>
   <%= label_tag :name %>
@@ -33,18 +32,18 @@
         <% if n.product_id == @product.id %>
       <tr>
         <td> <%= n.name %> </td>
-        <td> $<%= n.price_in_cents.to_f/100 %>
+        <td> <%=number_to_currency n.price_in_cents.to_f/100 %>
           <div class="buttons">
             <td>
             <li>
-              <form action="/admin/product-options/edit/<%= @product.id %>" method="POST">
+              <form action="/admin/product-options/edit/<%= @product.id %>", :edit_options_path method="POST">
                 <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
                 <input type="hidden" name="_method" value="GET" />
                 <input class="button" type="submit" value="Edit" />
               </form>
             </li></td>
             <td><li>
-              <form action="/admin/product-options/edit/<%= n.id %>" method="POST">
+              <form action="/admin/product-options/delete/<%= n.id %>" method="POST">
                 <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
                 <input type="hidden" name="_method" value="DELETE" />
                 <input class="button" type="submit" value="Delete" data-confirm="Delete the data?"/>

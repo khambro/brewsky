@@ -1,21 +1,28 @@
 <p>Please review your order</p>
 <div class = "user_info">
 
+  <form action= "/cart/update-order" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+      <div>
+        <h4>
+          <label for="name">Name</label>
+        </h4>
+          <input type="text" id = "name" name="name"  />
+      </div>
+      <div>
+        <h4>
+          <label for="address">Address</label>
+        </h4>
+          <input type="text" id = "address" name="address"  />
+      </div>
+      <div class="update">
+        <input type="submit" value="Check Out" />
+      </div>
+  </form>
 
-<%= form_tag "/cart/checkout/:id" do %>
-<div>
-  <%= label_tag :name %>
-  <%= text_field_tag "order[name]", nil, placeholder: "First Name, Last Name", class: "name" %>
-</div>
-<div>
-  <%= label_tag :address %>
-  <%= text_area_tag "order[address]", nil, placeholder: "Street\nApt#\nState,Zip", class: "address" %>
-</div>
 
 
-<%= submit_tag "Submit Order" %>
 
-<%end%>
 </div>
 
 <div class = "summary">
@@ -31,28 +38,23 @@
       <h4>Price Each:</h4>
       <h4><%= number_to_currency n.product_option.price_in_cents.to_f/100 %></h4>
       <h4>Item Total:</h4>
-      <h4><%= number_to_currency  n.product_option.price_in_cents * n.quantity.to_f  %></h4>
+      <h4><%= number_to_currency (n.product_option.price_in_cents * n.quantity.to_f/100)  %></h4>
     </div>
   </div>
 <% end %>
-<h3>Items in cart = <%= @items.count %></h3>
+<h3>Items in cart = <% total_items = 0 %>
+                    <% @items.each do |n| %>
+                    <% total_items += n.quantity  %>
+                    <% end %>
+                    <%= total_items %></h3>
 
 <h3>Order total=
   <% sum = 0  %>
   <% @items.each do |n| %>
-  <% p = n.product_option.price_in_cents %>
+  <% p = (n.product_option.price_in_cents * n.quantity) %>
   <% sum += p  %>
-  <% sum.to_f/100  %>
   <% end %>
   <%= number_to_currency sum.to_f/100 %>
 </h3>
 
 </div>
-
-
-
-<!-- On the checkout page /checkout
-I see a brief summary of my order (total price)
-I must put in my name and address.
-I can click a "Submit order" button
-If the order is valid I am taken to an order confirmation page -->

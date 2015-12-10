@@ -11,11 +11,9 @@ class OrdersController < ApplicationController
 
 
 
-
   def show
-    #show cart
-    @order = Order.new(params[:order_id])
-    @order.save
+
+    @current_order = Order.find(session[:id])
     @items = Item.all
     # if session[:id]
     #   @current_user = User.find(session[:id])
@@ -26,6 +24,25 @@ class OrdersController < ApplicationController
   end
 
   def update
+    @current_order = Order.find(session[:id])
+    @current_order.name = params[:name]
+    @current_order.shipping_address = params[:address]
+    @current_order.status = "paid"
+    if @current_order.save
+
+
+      redirect_to "/cart/checkout/:id/confirmation"
+
+    else
+        raise
+      render "show"
+    end
+  end
+
+
+
+  def confirmation
+
   end
 
 

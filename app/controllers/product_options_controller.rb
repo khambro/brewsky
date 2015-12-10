@@ -1,7 +1,6 @@
 class ProductOptionsController < ApplicationController
 
   def index
-
     @product_options = ProductOption.all
     @product = Product.find(params[:id])
   end
@@ -13,19 +12,31 @@ class ProductOptionsController < ApplicationController
 
 
   def create
-      @product = Product.find(params[:id])
+
+      @product = Product.find(params[:product_option][:product_id])
       @product_options = ProductOption.new(product_options_params)
       @product_options.save
-      redirect_to "/admin/product-options/edit/#{@product.id}"
+      redirect_to "/admin/product-options/#{@product.id}"
   end
 
 
   def formatted_price
-    "$#{@product_options.price_in.cents.to_f/100}"
+    number_to_currency @product_options.price_in.cents.to_f/100
   end
 
   def new
 
+  end
+
+  def update
+    @current_order = Order.find(session[:id])
+    @product_option.name = params[:name]
+    @product_option.price_in_cents = params[:price_in_cents]
+    if @product_option.save
+      redirect_to "/admin/product-options/edit/#{@product_option.product_id}"
+    else
+      render "show"
+    end
   end
 
 
@@ -33,7 +44,7 @@ class ProductOptionsController < ApplicationController
   def delete
     @product_option = ProductOption.find(params[:id])
     @product_option.destroy
-    redirect_to "/admin/product-options/edit/#{@product_option.product_id}"
+    redirect_to "/admin/product-options/#{@product_option.product_id}"
   end
 
 

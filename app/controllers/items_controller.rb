@@ -4,7 +4,6 @@ class ItemsController < ApplicationController
 
     @item = Item.new(item_params)
     if session[:id]
-
       @current_order = Order.find(session[:id])
     else
       @current_order = Order.create
@@ -13,12 +12,12 @@ class ItemsController < ApplicationController
      @item.order_id = @current_order.id
      @item.price = @item.product_option.price_in_cents * @item.quantity
      @item.save
-    redirect_to "/cart/:id"
+    redirect_to "/product/options/#{@item.product_option.product_id}"
   end
 
   def show
-    @current_order = Order.find(session[:id])
-    @items = Item.where(order_id: @current_order.id)
+      @current_order = Order.find(session[:id])
+      @items = Item.where(order_id: @current_order.id)
   end
 
 
