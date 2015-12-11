@@ -23,7 +23,8 @@ Rails.application.routes.draw do
   post "/admin/product-options/new", to: "product_options#create"
   delete "/admin/product-options/delete/:id", to: "product_options#delete"
   get "/admin/product-options/edit/:id", to: "product_options#edit", as: :edit_options
-  post "/admin/products-options/edit", to: "product_options#update"
+  post "/admin/product-options/edit", to: "product_options#update"
+
 
 
   get "/product/options/:id", to: "products#show"

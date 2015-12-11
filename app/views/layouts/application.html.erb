@@ -8,7 +8,6 @@
 </head>
 <body>
 
-
   <nav class= "navbar navbar-inverse">
     <div class="container">
       <div class="navbar-header">
@@ -28,19 +27,13 @@
 
           <ul class="nav navbar-nav">
             <li><a href="/cart">Cart <% if @current_order %>
-                                        <% total_items = 0 %>
-                                        <% @items.each do |n| %>
-                                        <% total_items += n.quantity  %>
-                                        <% end %>
-                                        <p class = "cart_total"><%= total_items %></p>
+                                        <p class = "cart_total"><%= @current_order.total_items %></p>
                                       <% else %>
                                         <%= 0 %>
                                       <% end %></li></a>
-
             <li><%= link_to "Contact Us", "#" %></li>
             <% if @current_user %>
             <li><%= link_to "My Account", "/view-account/#{@current_user.id}" %></li>
-
             <li><%= link_to "Sign Out", sign_out_path %></li>
             <% end %>
           </ul>

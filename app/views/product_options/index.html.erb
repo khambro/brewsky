@@ -1,61 +1,71 @@
-<%= @product.name %>
-<%= @product.description %>
+THIS PAGE
+<div class= "container">
 
-<h2>Add Product Options</h2>
-
-<%= form_tag "/admin/product-options/new" do %>
-
-<div>
-  <%= label_tag :name %>
-  <%= text_area_tag "product_option[name]", nil, placeholder: "name", class: "text-field" %>
-</div>
-<div>
-  <%= label_tag :price_in_cents %>
-  <%= text_area_tag "product_option[price_in_cents]", nil, placeholder: "price in cents", class: "price_in_cents" %>
-</div>
-<input type="hidden" name="product_option[product_id]" value="<%= @product.id %>" />
+  <div class = "summary">
+    <h2><%= @product.name %></h2>
+    <p><%= @product.description %></p>
 
 
 
-<%= submit_tag "Add  Options" %>
+  </div>
 
-<%end%>
+  <h2>Add Product Options</h2>
+
+  <%= form_tag "/admin/product-options/new" do %>
+
+  <div>
+    <%= label_tag :name %>
+    <%= text_area_tag "product_option[name]", nil, placeholder: "name", class: "text-field" %>
+  </div>
+  <div>
+    <%= label_tag :price_in_cents %>
+    <%= text_area_tag "product_option[price_in_cents]", nil, placeholder: "price in cents", class: "price_in_cents" %>
+  </div>
+  <input type="hidden" name="product_option[product_id]" value="<%= @product.id %>" />
+
+
+
+  <%= submit_tag "Add  Options" %>
+
+  <%end%>
 
 
 
 
-<div class="container">
-  <div class="row">
-    <table class="col-sm-12">
-      <h3><%= @product.name %></h3>
-  <tr>
-    <th>Name</th>
-    <th>Price</th>
-  </tr>
-      <% @product_options.each do |n| %>
-        <% if n.product_id == @product.id %>
-      <tr>
-        <td> <%= n.name %> </td>
-        <td> <%=number_to_currency n.price_in_cents.to_f/100 %>
-          <div class="buttons">
-            <td>
-            <li>
-              <form action="/admin/product-options/edit/<%= @product.id %>", :edit_options_path method="POST">
-                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-                <input type="hidden" name="_method" value="GET" />
-                <input class="button" type="submit" value="Edit" />
-              </form>
-            </li></td>
-            <td><li>
-              <form action="/admin/product-options/delete/<%= n.id %>" method="POST">
-                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-                <input type="hidden" name="_method" value="DELETE" />
-                <input class="button" type="submit" value="Delete" data-confirm="Delete the data?"/>
-              </form>
-            </li></td>
-          </div>
-      </tr>
+  <div class="container">
+    <div class="row">
+      <table class="col-sm-12">
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+    </tr>
+        <% @product_options.each do |n| %>
+          <% if n.product_id == @product.id %>
+        <tr>
+          <td> <%= n.name %> </td>
+          <td> <%=number_to_currency n.price_in_cents.to_f/100 %>
+            <div class="buttons">
+              <td>
+              <li>
+                <form action="/admin/product-options/edit/<%= @product.id %>", :edit_options_path method="POST">
+                  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                  <input type="hidden" name="product[product_option][id]" value="<%= n.id %>" />
+                  <input type="hidden" name="_method" value="GET" />
+                  <input class="button" type="submit" value="Edit" />
+                </form>
+              </li></td>
+              <td><li>
+                <form action="/admin/product-options/delete/<%= n.id %>" method="POST">
+                  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                  <input type="hidden" name="_method" value="DELETE" />
+                  <input class="button" type="submit" value="Delete" data-confirm="Delete the data?"/>
+                </form>
+              </li></td>
+            </div>
+        </tr>
 
+        <% end %>
       <% end %>
-    <% end %>
-</table>
+  </table>
+
+</div>

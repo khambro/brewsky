@@ -23,14 +23,7 @@
           <% total_items += n.quantity  %>
           <% end %>
           <%= total_items %></td>
-      <td><% order.items.each do |item| %>
-          <div>
-            (<%= item.quantity %>)
-            <%= item.product_option.product.name %>
-            <%= item.product_option.name %>
-            <%= number_to_currency item.price.to_f/100 %>
-          </div>
-            <% end %>
+      
       </td>
       <td><%= order.status %></td>
       <td><%= form_tag "/admin/order" do %>

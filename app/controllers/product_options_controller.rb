@@ -12,7 +12,6 @@ class ProductOptionsController < ApplicationController
 
 
   def create
-
       @product = Product.find(params[:product_option][:product_id])
       @product_options = ProductOption.new(product_options_params)
       @product_options.save
@@ -29,15 +28,16 @@ class ProductOptionsController < ApplicationController
   end
 
   def update
-    @current_order = Order.find(session[:id])
-    @product_option.name = params[:name]
-    @product_option.price_in_cents = params[:price_in_cents]
+    @product_option = ProductOption.find(params[:product_id])
+    @product_option.name = params[:product_option][:name]
+    @product_option.price_in_cents = params[:product_option][:price_in_cents]
     if @product_option.save
       redirect_to "/admin/product-options/edit/#{@product_option.product_id}"
     else
       render "show"
     end
   end
+
 
 
 

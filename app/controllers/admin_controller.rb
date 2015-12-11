@@ -32,6 +32,8 @@ class AdminController < ApplicationController
 
   def orders
     @orders = Order.all
+    @products = Product.all
+    @product_options = ProductOption.all
   end
 
 
