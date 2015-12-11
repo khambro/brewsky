@@ -1,71 +1,67 @@
-<h2>Shopping Cart</h2>
+<div class= "container">
 
-  <% if @current_order.items.count != 0  %>
-  <div class= "items_in_cart">
 
-  <table >
-    <th>Item</th>
-    <th>Quantity</th>
-    <th>Price Each</th>
-    <th>Item Total</th>
-      <% @items.each do |n| %>
-      <tr>
-      <td><%= n.product_option.name %></td>
-      <td><%= n.quantity %></td>
-      <td><%= number_to_currency n.product_option.price_in_cents.to_f/100%></td>
-      <td><%= number_to_currency  n.product_option.price_in_cents.to_f/100 * n.quantity.to_f  %></td>
-      <td> <form action="/cart/delete-item" method="POST">
-           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-           <input type="hidden" name="item[id]" value="<%= n.id %>" />
-           <input type="hidden" name="_method" value="DELETE" />
-           <input class="btn btn-danger" type="submit" value="Remove Item" data-confirm="Remove Item?"/>
-         </form></td>
-    </tr>
+
+  <h2>Shopping Cart</h2>
+
+    <% if @current_order.items.count != 0  %>
+    <div class= "items_in_cart">
+
+    <table width="100%" >
+      <th>Item</th>
+      <th>Quantity</th>
+      <th>Price Each</th>
+      <th>Item Total</th>
+        <% @items.each do |n| %>
+        <tr>
+        <td><%= n.product_option.name %></td>
+        <td><%= n.quantity %></td>
+        <td><%= number_to_currency n.product_option.price_in_cents.to_f/100%></td>
+        <td><%= number_to_currency  n.product_option.price_in_cents.to_f/100 * n.quantity.to_f  %></td>
+        <td> <form action="/cart/delete-item" method="POST">
+             <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+             <input type="hidden" name="item[id]" value="<%= n.id %>" />
+             <input type="hidden" name="_method" value="DELETE" />
+             <input class="btn btn-danger" type="submit" value="Remove Item" data-confirm="Remove Item?"/>
+           </form></td>
+      </tr>
+        <% end %>
+
+    </table>
+
+    </div>
+
+      <h3>Items in cart = <% total_items = 0 %>
+                          <% @items.each do |n| %>
+                          <% total_items += n.quantity  %>
+                          <% end %>
+                          <%= total_items %></h3>
+
+      <h3>Order total=
+        <% sum = 0  %>
+        <% @items.each do |n| %>
+        <% p = (n.product_option.price_in_cents * n.quantity) %>
+        <% sum += p  %>
+        <% end %>
+        <%= number_to_currency sum.to_f/100 %>
+      </h3>
+
+    </div>
+
+    <div class= "checkout">
+      <%= form_tag "/cart/checkout/#{@current_order.id}" do %>
+      <input type="hidden" name="order[total]" value="<%= sum %>" />
+      <input type="hidden" name="order[status]" value="browsing" />
+      <input type="hidden" name="order[id]" value="<%= @current_order.id %>" />
+      <%= submit_tag "Check Out" %>
       <% end %>
 
+    </div>
 
-    <tr></tr>
+    <% else %>
 
+      <h3><%= "Your cart is empty. Time to shop!" %></h3>
 
-
-
-
-
-  </table>
-
-
-
-  </div>
-
-    <h3>Items in cart = <% total_items = 0 %>
-                        <% @items.each do |n| %>
-                        <% total_items += n.quantity  %>
-                        <% end %>
-                        <%= total_items %></h3>
-
-    <h3>Order total=
-      <% sum = 0  %>
-      <% @items.each do |n| %>
-      <% p = (n.product_option.price_in_cents * n.quantity) %>
-      <% sum += p  %>
-      <% end %>
-      <%= number_to_currency sum.to_f/100 %>
-    </h3>
-
-  </div>
-
-  <div class= "checkout">
-    <%= form_tag "/cart/checkout/#{@current_order.id}" do %>
-    <input type="hidden" name="order[total]" value="<%= sum %>" />
-    <input type="hidden" name="order[status]" value="browsing" />
-    <input type="hidden" name="order[id]" value="<%= @current_order.id %>" />
-    <%= submit_tag "Check Out" %>
     <% end %>
 
-  </div>
-
-  <% else %>
-
-    <h3><%= "Your cart is empty. Time to shop!" %></h3>
-
-  <% end %>
+</div>  

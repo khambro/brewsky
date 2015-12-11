@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
      @item.order_id = @current_order.id
      @item.price = @item.product_option.price_in_cents * @item.quantity
      @item.save
-    redirect_to "/product/options/#{@item.product_option.product_id}"
+    redirect_to "/product/options/#{@item.product_option.product_id}", notice: "Item has been added to your cart! Cheers!"
   end
 
   def show
@@ -20,7 +20,6 @@ class ItemsController < ApplicationController
       @items = Item.where(order_id: @current_order.id)
 
   end
-
 
   def delete
 

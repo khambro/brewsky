@@ -32,7 +32,7 @@
                                         <% @items.each do |n| %>
                                         <% total_items += n.quantity  %>
                                         <% end %>
-                                        <%= total_items %>
+                                        <p class = "cart_total"><%= total_items %></p>
                                       <% else %>
                                         <%= 0 %>
                                       <% end %></li></a>

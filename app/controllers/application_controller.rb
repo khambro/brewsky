@@ -18,7 +18,17 @@ class ApplicationController < ActionController::Base
       session[:id] = @current_order.id
     end
       @items = Item.where(order_id: @current_order.id) if @current_order
-    
+  end
+
+  def signed_in_as_admin?
+    @current_user && @current_user.admin?
+  end
+
+
+  def authorize_admin
+    if !signed_in_as_admin?
+      redirect_to root_path, notice: "Back off! You are not authorized to view that page!"
+    end
   end
 
 

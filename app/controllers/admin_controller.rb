@@ -1,4 +1,5 @@
 class AdminController < ApplicationController
+  before_action :authorize_admin
 
 
 
@@ -11,7 +12,6 @@ class AdminController < ApplicationController
   end
 
   def update
-
     @product                        = Product.find(params[:id])
     @product.name                   = params[:product][:name]
     @product.description            = params[:product][:description]
@@ -20,6 +20,13 @@ class AdminController < ApplicationController
     else
       render "/admin/products/edit/:id"
     end
+  end
+
+  def order_status
+    @order = Order.find(params[:order][:id])
+    @order.status = params[:order][:status]
+    @order.save
+    redirect_to "/admin-order"
   end
 
 

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post "/admin/products/edit/:id", to: "admin#update"
 
   get "/admin-order", to: "admin#orders"
+  post "/admin/order", to: "admin#order_status"
 
   get "/admin/product-options/:id", to: "product_options#index", as: :options
   post "/admin/product-options/new", to: "product_options#create"

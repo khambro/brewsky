@@ -5,7 +5,6 @@ class OrdersController < ApplicationController
 
     @order = Order.new(order_params)
     @order.save
-
     redirect_to "/cart/checkout/#{@current_order.id}"
   end
 
@@ -15,14 +14,6 @@ class OrdersController < ApplicationController
     @current_order = Order.find(session[:id])
     @items = Item.where(order_id: @current_order)
 
-
-
-    # if session[:id]
-    #   @current_user = User.find(session[:id])
-    # end
-    # session[:id] = @order.id
-    # redirect_to "/cart/#{session.id}"
-    # @order = Order.find(params[:session][:id])
   end
 
   def update
@@ -30,6 +21,7 @@ class OrdersController < ApplicationController
     @current_order = Order.find(session[:id])
     @current_order.name = params[:name]
     @current_order.shipping_address = params[:address]
+    @current_order.total = 
     @current_order.status = "paid"
     if @current_order.save
     session.delete(:id)

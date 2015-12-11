@@ -1,3 +1,20 @@
+body {
+  background-color: #F4F4F9;
+}
+
+.navbar-inverse .navbar-brand {
+  color: #04724D;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #04724D;
+}
+
+
+.header .jumbotron {
+  background-color: #B8DBD9;
+}
+
 .header {
   display: inline-block;
   height: 100px;
@@ -43,4 +60,9 @@ li {
 
 .product {
   margin: 0 0 20px 0;
+}
+
+.cart_total {
+  color: rgb(235, 16, 193);
+  font-size: 22px;
 }

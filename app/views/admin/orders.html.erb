@@ -1,5 +1,6 @@
 <table style="width:100%">
   <tr>
+    <th>Order #</th>
     <th>Name</th>
     <th>Address</th>
     <th>Order Total</th>
@@ -9,19 +10,40 @@
   </tr>
   <% @orders.each do |order|%>
     <tr>
+      <td><%= order.id %></td>
       <td><%= order.name %></td>
       <td><%= order.shipping_address %></td>
-      <td><%= number_to_currency order.total.to_f/100 %></td>
-      <td><%= order.items.count %></td>
+      <td><% total_price = 0 %>
+          <% order.items.each do |p| %>
+          <% total_price += p.price %>
+          <%  end %>
+          <%= number_to_currency total_price.to_f/100 %></td>
+      <td><% total_items = 0 %>
+          <% order.items.each do |n| %>
+          <% total_items += n.quantity  %>
+          <% end %>
+          <%= total_items %></td>
       <td><% order.items.each do |item| %>
           <div>
+            (<%= item.quantity %>)
+            <%= item.product_option.product.name %>
             <%= item.product_option.name %>
             <%= number_to_currency item.price.to_f/100 %>
           </div>
             <% end %>
       </td>
       <td><%= order.status %></td>
+      <td><%= form_tag "/admin/order" do %>
+        <input type="hidden" name="order[id]" value="<%= order.id %>"/>
+        <input type="hidden" name="order[status]" value="shipped" />
+      <div>
+        <%= submit_tag "Update Status to Shipped" %>
+        <hr>
+      </div>
+          <% end %>
+      </td>
     </tr>
     <% end %>
+
 
 </table>
