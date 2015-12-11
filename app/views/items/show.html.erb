@@ -3,21 +3,40 @@
   <% if @current_order.items.count != 0  %>
   <div class= "items_in_cart">
 
+  <table >
+    <th>Item</th>
+    <th>Quantity</th>
+    <th>Price Each</th>
+    <th>Item Total</th>
+      <% @items.each do |n| %>
+      <tr>
+      <td><%= n.product_option.name %></td>
+      <td><%= n.quantity %></td>
+      <td><%= number_to_currency n.product_option.price_in_cents.to_f/100%></td>
+      <td><%= number_to_currency  n.product_option.price_in_cents.to_f/100 * n.quantity.to_f  %></td>
+      <td> <form action="/cart/delete-item" method="POST">
+           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+           <input type="hidden" name="item[id]" value="<%= n.id %>" />
+           <input type="hidden" name="_method" value="DELETE" />
+           <input class="btn btn-danger" type="submit" value="Remove Item" data-confirm="Remove Item?"/>
+         </form></td>
+    </tr>
+      <% end %>
 
-    <% @items.each do |n| %>
-      <div class = "col-lg-10">
-        <div>
-          <h4>Item:</h4>
-          <h4 class="item" ><%= n.product_option.name %></h4>
-          <h4>Quantity:</h4>
-          <h4><%= n.quantity %></h4>
-          <h4>Price Each:</h4>
-          <h4><%= number_to_currency n.product_option.price_in_cents.to_f/100%></h4>
-          <h4>Item Total:</h4>
-          <h4><%= number_to_currency  n.product_option.price_in_cents.to_f/100 * n.quantity.to_f  %></h4>
-        </div>
-      </div>
-    <% end %>
+
+    <tr></tr>
+
+
+
+
+
+
+  </table>
+
+
+
+  </div>
+
     <h3>Items in cart = <% total_items = 0 %>
                         <% @items.each do |n| %>
                         <% total_items += n.quantity  %>

@@ -39,7 +39,8 @@
 
             <li><%= link_to "Contact Us", "#" %></li>
             <% if @current_user %>
-            <!-- <li><%= @current_user.email %></li> -->
+            <li><%= link_to "My Account", "/view-account/#{@current_user.id}" %></li>
+
             <li><%= link_to "Sign Out", sign_out_path %></li>
             <% end %>
           </ul>

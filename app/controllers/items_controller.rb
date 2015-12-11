@@ -22,7 +22,12 @@ class ItemsController < ApplicationController
   end
 
 
+  def delete
 
+    @item = Item.find(params[:item][:id])
+    @item.destroy
+    redirect_to "/cart"
+  end
 
 
 
