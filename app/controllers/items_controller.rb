@@ -15,7 +15,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-
+    # REVIEW: Nit picky, extra level of indentation
       @current_order = Order.find(session[:id])
       @items = Item.where(order_id: @current_order.id)
 

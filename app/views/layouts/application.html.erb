@@ -29,10 +29,12 @@
             <li><a href="/cart">Cart <% if @current_order %>
                                         <p class = "cart_total"><%= @current_order.total_items %></p>
                                       <% else %>
+                                        <!-- REVIEW: Since this 0 is just a zero, it doesn't need to be within <%= %> -->
                                         <%= 0 %>
                                       <% end %></li></a>
             <li><%= link_to "Contact Us", "#" %></li>
             <% if @current_user %>
+            <!-- REVIEW: This should be indented -->
             <li><%= link_to "My Account", "/view-account/#{@current_user.id}" %></li>
             <li><%= link_to "Sign Out", sign_out_path %></li>
             <% end %>

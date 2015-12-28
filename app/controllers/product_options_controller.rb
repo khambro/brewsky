@@ -20,6 +20,7 @@ class ProductOptionsController < ApplicationController
 
 
   def formatted_price
+    # REVIEW: this number to currency should be in the view
     number_to_currency @product_options.price_in.cents.to_f/100
   end
 
@@ -46,7 +47,7 @@ class ProductOptionsController < ApplicationController
     @product_option.destroy
     redirect_to "/admin/product-options/#{@product_option.product_id}"
   end
-
+  # REVIEW: Not a big deal but having so many line breaks between methods is a bit odd
 
 
 

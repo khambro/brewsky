@@ -3,6 +3,7 @@
   <h2>Add New Products</h2>
 
   <%= form_tag "/admin/products" do %>
+  <!-- REVIEW: the authenticity_token input is not needed when you use `form_tag`  -->
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
   <div>
     <%= label_tag :name %>

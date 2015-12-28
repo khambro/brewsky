@@ -21,9 +21,10 @@ class OrdersController < ApplicationController
     @current_order = Order.find(session[:id])
     @current_order.name = params[:name]
     @current_order.shipping_address = params[:address]
-    @current_order.total = 
+    @current_order.total =
     @current_order.status = "paid"
     if @current_order.save
+      # REVIEW: session.delete should be indented
     session.delete(:id)
       redirect_to "/cart/checkout/#{@current_order.id}/confirmation"
 

@@ -1,6 +1,7 @@
 <div class="container">
 
   <h2>Thank you for your order!</h2>
+  <!-- REVIEW: I know this order number is temporary, but rand(789098) would do the same thing-->
   <h2>Your order has been placed and your confirmation number is <% n = (1..789098).to_a %>
                                                                  <%= n.sample  %></h2>
 

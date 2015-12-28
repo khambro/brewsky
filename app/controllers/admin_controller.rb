@@ -15,6 +15,7 @@ class AdminController < ApplicationController
     @product                        = Product.find(params[:id])
     @product.name                   = params[:product][:name]
     @product.description            = params[:product][:description]
+    # REVIEW: You can do 'mass assignement' with @product.update(params.require(:product).permit(:name, :description))
     if @product.save
       redirect_to "/admin/products"
     else
@@ -33,6 +34,8 @@ class AdminController < ApplicationController
   def orders
     @orders = Order.all
     @products = Product.all
+    # REVIEW: It looks like this variable is not used. Typically the product options would be found
+    #         from the parent object `product.product_options`
     @product_options = ProductOption.all
   end
 

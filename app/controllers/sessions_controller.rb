@@ -8,6 +8,9 @@ class SessionsController < ApplicationController
 
   def sign_in
     @user = User.find_by(email: params[:email])
+      # REVIEW: The `@user.authenticate` should be on the same line as `if`
+                # if @user && @user.authenticate(params[:password])
+                # And there is an extra level of indentation
       if @user
         @user.authenticate(params[:password])
         session[:user_id] = @user.id

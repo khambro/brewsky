@@ -13,6 +13,7 @@
       <td><%= order.id %></td>
       <td><%= order.name %></td>
       <td><%= order.shipping_address %></td>
+      <!-- REVIEW: You should do this totaling in the model, then just call that method. -->
       <td><% total_price = 0 %>
           <% order.items.each do |p| %>
           <% total_price += p.price %>
@@ -23,7 +24,7 @@
           <% total_items += n.quantity  %>
           <% end %>
           <%= total_items %></td>
-      
+
       </td>
       <td><%= order.status %></td>
       <td><%= form_tag "/admin/order" do %>
